@@ -64,4 +64,4 @@ def states_put(state_id):
         if key != "id" and key != "created_at" and key != "updated_at":
             setattr(obj_state, key, value)
     obj_state.save()
-    return jsonify(obj_state.to_dict()), 201
+    return jsonify(obj_state.to_dict()), 200

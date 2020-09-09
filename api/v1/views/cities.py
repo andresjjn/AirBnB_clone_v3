@@ -70,4 +70,4 @@ def city_put(city_id):
         if key != "id" and key != "created_at" and key != "updated_at":
             setattr(obj_city, key, value)
     obj_city.save()
-    return jsonify(obj_city.to_dict()), 201
+    return jsonify(obj_city.to_dict()), 200

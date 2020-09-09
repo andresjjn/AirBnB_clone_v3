@@ -67,4 +67,4 @@ def amenity_put(amenity_id):
         if key != "id" and key != "created_at" and key != "updated_at":
             setattr(obj_amenity, key, value)
     obj_amenity.save()
-    return jsonify(obj_amenity.to_dict()), 201
+    return jsonify(obj_amenity.to_dict()), 200

@@ -6,14 +6,14 @@ from flask import jsonify
 from models import storage
 
 
-@app_views.route('/status')  # , methods=['GET'])
+@app_views.route('/status', strict_slashes=False)  # , methods=['GET'])
 def status():
     """ Returns the Status of your API"""
     my_status = {"status": "ok"}
     return jsonify(my_status)
 
 
-@app_views.route('/stats')
+@app_views.route('/stats', strict_slashes=False)
 def stats():
     """ retrieves the number of each objects by type """
     clases = {

@@ -1,36 +1,31 @@
 #!/usr/bin/python3
-""" This file contain the reponse of API status
-"""
+""" Flask route that returns the Json status"""
+
 from api.v1.views import app_views
 from flask import jsonify
 from models import storage
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-from models.user import User
 
 
-classes = {"Amenity": Amenity, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+@app_views.route('/status')  # , methods=['GET'])
+def status():
+    """ Returns the Status of your API"""
+    my_status = {"status": "ok"}
+    return jsonify(my_status)
 
 
-@app_views.route('/status', strict_slashes=False)
-def response():
-    """JSON responde of API status"""
-    return jsonify({'status': 'ok' })
-
-
-@app_views.route('/stats', strict_slashes=False)
-def counter():
-    """Funtion that return the number of objects by class"""
-    return jsonify({"amenities": storage.count(classes["Amenity"]),
-                   "cities": storage.count(classes["City"]),
-                   "places": storage.count(classes["Place"]),
-                   "reviews": storage.count(classes["Review"]),
-                   "states": storage.count(classes["State"]),
-                   "users": storage.count(classes["User"])})
-
-if __name__ == "__main__":
-    pass
+@app_views.route('/stats')
+def stats():
+    """ retrieves the number of each objects by type """
+    clases = {
+        "amenities": "Amenity",
+        "cities": "City",
+        "places": "Place",
+        "reviews": "Review",
+        "states": "State",
+        "users": "User"
+    }
+    json_response = {}
+    for key, value in clases.items():
+        val = storage.count(value)
+        json_response[key] = val
+    return jsonify(json_response)

@@ -77,8 +77,10 @@ class DBStorage:
 
     def get(self, cls, id):
         """ Get a object using class name and id """
-        dic = self.all(cls)
-        return dic["{}.{}".format(cls.__name__, id)]
+        for state_obj in self.all(cls).values():
+            if id == state_obj.id:
+                return state_obj
+        return None
 
     def count(self, cls=None):
         """ Counts the number of objects per class """

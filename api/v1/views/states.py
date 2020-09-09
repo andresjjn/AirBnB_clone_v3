@@ -61,7 +61,7 @@ def states_put(state_id):
     if not isinstance(data, dict):
         abort(400, description="Not a JSON")
     for key, value in data.items():
-        if key != "id" and key != "create_at" and key != "updated_at":
+        if key != "id" and key != "created_at" and key != "updated_at":
             setattr(obj_state, key, value)
     obj_state.save()
     return jsonify(obj_state.to_dict()), 201

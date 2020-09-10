@@ -49,7 +49,7 @@ def city_post(state_id):
         abort(400, description="Not a JSON")
     if "name" not in data.keys():
         abort(400, description="Missing name")
-    if storage.get("State", state_id) == None:
+    if storage.get("State", state_id) is None:
         abort(404)
     data['state_id'] = state_id
     obj_city = City(**data)

@@ -7,8 +7,6 @@ from api.v1.views import app_views
 from models import storage
 from models.place import Place
 
-app.url_map.strict_slashes = False
-
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'])
 def all_places(city_id):
@@ -63,7 +61,6 @@ def place_post(city_id):
 
     data["city_id"] = city_id
     obj_place = Place(**data)
-    print("herhehre\n", obj_place.to_dict())
     storage.new(obj_place)
     storage.save()
     return jsonify(obj_place.to_dict()), 201

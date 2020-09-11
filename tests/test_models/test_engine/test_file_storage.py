@@ -34,7 +34,7 @@ class TestFileStorageDocs(unittest.TestCase):
         # cleans the database
         for _, obj in storage.all().copy().items():
             storage.delete(obj)
-            storage.save()
+        storage.save()
 
         cls.state = State(name="Antioquia")
 

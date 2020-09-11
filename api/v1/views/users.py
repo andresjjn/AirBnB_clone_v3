@@ -65,6 +65,9 @@ def user_put(user_id):
     for key, value in data.items():
         if key != "id" and key != "created_at" and key != "updated_at" and\
            key != "email":
-            setattr(obj_user, key, value)
+            if key == "password":
+                obj_user.update_password(value)
+            else:
+                setattr(obj_user, key, value)
     obj_user.save()
     return jsonify(obj_user.to_dict()), 200

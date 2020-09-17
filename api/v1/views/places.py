@@ -123,7 +123,8 @@ def search_places():
                 for obj_place in obj_city.places:
                     list_places.add(obj_place)
 
-        if class_name == "amenities":
+        if class_name == "amenities" and data.get("amenities") != []:
+            list_places = set()
 
             list_of_sets_places = []
 

@@ -60,9 +60,16 @@ def amenity_deletes_and_post(place_id, amenity_id):
 
             if obj_amenity not in obj_place.amenities:
                 obj_place.amenities.append(obj_amenity)
+            else:
+                storage.save()
+                return jsonify(obj_amenity.to_dict()), 200
         else:
             if amenity_id not in obj_place.amenity_ids:
                 obj_place.amenity_ids.append(amenity_id)
+            else:
+                obj_amenity = storage.get("Amenity", amenity_id)
+                storage.save()
+                return jsonify(obj_amenity.to_dict()), 200
 
         storage.save()
         return jsonify(obj_amenity.to_dict()), 201

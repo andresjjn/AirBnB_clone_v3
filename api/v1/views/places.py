@@ -96,6 +96,13 @@ def search_places():
     if not isinstance(data, dict):
         abort(400, description="Not a JSON")
 
+    if data == {} or not bool([a for a in data.values() if a != []]):
+        all_places = [
+            place.to_dict()
+            for place in storage.all("Place").values()
+        ]
+        return jsonify(all_places)
+
     # loop through the JSON dict
     for class_name, list_ids in data.items():
         if class_name == "states":
